@@ -4,8 +4,8 @@ workflows:
     instance_type: linux_x2
     max_build_duration: 60
     environment:
-#       groups:
-#          - android
+      groups:
+         - sonar
 #       groups:
 #          - firebase
       vars:
@@ -14,6 +14,7 @@ workflows:
         FCI_KEYSTORE_PASSWORD: Encrypted(Z0FBQUFBQmc1LWVnS3ljWGppTlNPVG8teFZERUFhejRJNThmQTlpOXFiLVV3N3JEN3F4WTJnVURXakxZdlJVMjhkYTlzVnhDX08yVkU5THNzcmhUTzdIY2dtdUFNS2l3cGc9PQ==)
         FCI_KEY_ALIAS: Encrypted(Z0FBQUFBQmc1LWVLUFF2LVhBQXFzWVhuOWtnNHBIMkE4M1pFYWdSd2U2cTZiM2ZDbzJNME00T1gyd0xnMFRBMk1nUUZrQ1UwTllpM05IY2dSRGZwUXl0TFliN1ZnRjNxRlE9PQ==)
         FCI_KEY_PASSWORD: Encrypted(Z0FBQUFBQmc1LWVnS3ljWGppTlNPVG8teFZERUFhejRJNThmQTlpOXFiLVV3N3JEN3F4WTJnVURXakxZdlJVMjhkYTlzVnhDX08yVkU5THNzcmhUTzdIY2dtdUFNS2l3cGc9PQ==)    
+        
       flutter: stable
       xcode: latest
       cocoapods: default
@@ -39,6 +40,7 @@ workflows:
           echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - flutter packages pub get
       - flutter build apk --release --build-name=2.0.$BUILD_NUMBER --build-number=$(($BUILD_NUMBER+ 1))
+      - flutter build sonarqube
       # - name: App upload and Set app id in environment variable.
       #   script: |
       #     curl -u "nihalagazade_JxPH1i:4y5LkQnzzGkv2s7ERZ4q" -X GET "https://api-cloud.browserstack.com/app-automate/recent_apps"
