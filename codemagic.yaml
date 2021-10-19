@@ -40,7 +40,7 @@ workflows:
           echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
       - flutter packages pub get
       - flutter build apk --release --build-name=2.0.$BUILD_NUMBER --build-number=$(($BUILD_NUMBER+ 1))
-      - flutter build sonarqube
+      - ./gradlew sonarqube
       # - name: App upload and Set app id in environment variable.
       #   script: |
       #     curl -u "nihalagazade_JxPH1i:4y5LkQnzzGkv2s7ERZ4q" -X GET "https://api-cloud.browserstack.com/app-automate/recent_apps"

@@ -57,3 +57,19 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+plugins {
+    id "org.sonarqube" version "3.3"
+}
+sonarqube {
+    properties {
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.branch", System.getenv("FCI_BRANCH")
+        property "sonar.projectKey", System.getenv("SONAR_PROJECT_KEY")
+        property "sonar.organization", System.getenv("SONAR_ORG_KEY")
+        property "sonar.branch.name", System.getenv("FCI_BRANCH")
+        property "sonar.branch.target", System.getenv("FCI_PULL_REQUEST_DEST")
+        property "sonar.login", System.getenv("SONAR_TOKEN")
+    }
+}
+
+
